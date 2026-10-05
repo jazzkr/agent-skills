@@ -1,7 +1,5 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended", ":dependencyDashboard"],
-  "git-submodules": { "enabled": true },
-  "schedule": ["before 05:00 on monday"],
-  "timezone": "Etc/UTC"
+  "git-submodules": { "enabled": true }
 }
