@@ -1,0 +1,11 @@
+[submodule "vendor/mattpocock-skills"]
+	path = vendor/mattpocock-skills
+	url = https://github.com/mattpocock/skills
+	branch = v1.3.1
+[submodule "vendor/ponytail"]
+	path = vendor/ponytail
+	url = https://github.com/DietrichGebert/ponytail
+	branch = v4.12.0
+[submodule "vendor/humanlayer-skills"]
+	path = vendor/humanlayer-skills
+	url = https://github.com/humanlayer/skills

@@ -1,0 +1,50 @@
+# Skill folders to install, relative to the repo root. One per line.
+
+# mattpocock/skills
+vendor/mattpocock-skills/skills/engineering/ask-matt
+vendor/mattpocock-skills/skills/engineering/code-review
+vendor/mattpocock-skills/skills/engineering/codebase-design
+vendor/mattpocock-skills/skills/engineering/diagnosing-bugs
+vendor/mattpocock-skills/skills/engineering/domain-modeling
+vendor/mattpocock-skills/skills/engineering/grill-with-docs
+vendor/mattpocock-skills/skills/engineering/implement
+vendor/mattpocock-skills/skills/engineering/implement-spec
+vendor/mattpocock-skills/skills/engineering/improve-codebase-architecture
+vendor/mattpocock-skills/skills/engineering/prototype
+vendor/mattpocock-skills/skills/engineering/research
+vendor/mattpocock-skills/skills/engineering/retro
+vendor/mattpocock-skills/skills/engineering/setup-matt-pocock-skills
+vendor/mattpocock-skills/skills/engineering/tdd
+vendor/mattpocock-skills/skills/engineering/to-spec
+vendor/mattpocock-skills/skills/engineering/to-tickets
+vendor/mattpocock-skills/skills/engineering/triage
+vendor/mattpocock-skills/skills/engineering/wayfinder
+vendor/mattpocock-skills/skills/engineering/wizard
+vendor/mattpocock-skills/skills/in-progress/claude-handoff
+vendor/mattpocock-skills/skills/in-progress/loop-me
+vendor/mattpocock-skills/skills/in-progress/setup-ts-deep-modules
+vendor/mattpocock-skills/skills/in-progress/writing-beats
+vendor/mattpocock-skills/skills/in-progress/writing-fragments
+vendor/mattpocock-skills/skills/in-progress/writing-shape
+vendor/mattpocock-skills/skills/misc/git-guardrails-claude-code
+vendor/mattpocock-skills/skills/misc/migrate-to-shoehorn
+vendor/mattpocock-skills/skills/misc/scaffold-exercises
+vendor/mattpocock-skills/skills/misc/setup-pre-commit
+vendor/mattpocock-skills/skills/productivity/grill-me
+vendor/mattpocock-skills/skills/productivity/grilling
+vendor/mattpocock-skills/skills/productivity/handoff
+vendor/mattpocock-skills/skills/productivity/teach
+vendor/mattpocock-skills/skills/productivity/to-questionnaire
+vendor/mattpocock-skills/skills/productivity/wait-what
+vendor/mattpocock-skills/skills/productivity/writing-for-agents
+
+# humanlayer/skills
+vendor/humanlayer-skills/plugins/show-me/skills/show-me
+
+# DietrichGebert/ponytail (ponytail.dev)
+vendor/ponytail/skills/ponytail
+vendor/ponytail/skills/ponytail-audit
+vendor/ponytail/skills/ponytail-debt
+vendor/ponytail/skills/ponytail-gain
+vendor/ponytail/skills/ponytail-help
+vendor/ponytail/skills/ponytail-review

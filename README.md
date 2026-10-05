@@ -1,0 +1,28 @@
+# agent-skills
+
+Agent skills for Claude Code, Codex, and other agents that read `~/.agents/skills`.
+
+## Install
+
+```bash
+git clone --recurse-submodules https://github.com/jazzkr/agent-skills.git
+./agent-skills/install.sh
+```
+
+`install.sh` links each folder in `skills.txt` into `~/.agents/skills` and `~/.claude/skills`. If a real folder already has the same name, the script skips it and shows a warning.
+
+## Update
+
+Renovate opens a PR when an upstream source has a new version:
+
+- Sources with a `branch = vX.Y.Z` tag in `.gitmodules` get a PR for each new release.
+- Sources without a `branch` line get a PR for each new commit on the default branch.
+
+Read the diff before you merge. Skills are prompts that run with your agent's permissions. After you merge, run `git pull && ./install.sh` on each machine.
+
+Do not use `git submodule update --remote`. It fails for submodules that are pinned to a tag. To update one by hand, run `git fetch --tags && git checkout <tag>` in the submodule, then change its `branch` value in `.gitmodules`.
+
+## Add a skill
+
+- From a current source: add its path to `skills.txt`.
+- From a new source: `git submodule add <url> vendor/<name>`, pin it to a release tag (see above), then add its paths to `skills.txt`.
