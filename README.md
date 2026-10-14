@@ -11,11 +11,19 @@ git clone --recurse-submodules https://github.com/jazzkr/agent-skills.git
 
 `install.sh` links each folder in `skills.txt` into `~/.agents/skills` and `~/.claude/skills`. If a real folder already has the same name, the script skips it and shows a warning.
 
+## Impeccable
+
+[Impeccable](https://github.com/pbakaus/impeccable) is pinned to the `skill-v4.5.2` release. The install script links its complete `.agents` skill bundle, including command references, nested agent definitions, and its launcher, into both skill folders.
+
+Use `/impeccable init` in Claude Code or `$impeccable init` in Codex to start. The launcher downloads its pinned engine on first use, so that first run needs network access. This installs the skill only; project hooks are not enabled.
+
+Renovate tracks only `skill-vX.Y.Z` tags for this source. Engine and CLI tags do not produce skill update PRs.
+
 ## Update
 
 Renovate opens a PR when an upstream source has a new version:
 
-- Sources with a `branch = vX.Y.Z` tag in `.gitmodules` get a PR for each new release.
+- Sources with a release tag in the `branch` field of `.gitmodules` get release updates. Impeccable uses `skill-vX.Y.Z`; the other tagged sources use `vX.Y.Z`.
 - Sources without a `branch` line get a PR for each new commit on the default branch.
 
 Read the diff before you merge. Skills are prompts that run with your agent's permissions. After you merge, run `git pull && ./install.sh` on each machine.

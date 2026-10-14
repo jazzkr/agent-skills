@@ -9,3 +9,7 @@
 [submodule "vendor/humanlayer-skills"]
 	path = vendor/humanlayer-skills
 	url = https://github.com/humanlayer/skills
+[submodule "vendor/impeccable"]
+	path = vendor/impeccable
+	url = https://github.com/pbakaus/impeccable
+	branch = skill-v4.5.2

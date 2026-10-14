@@ -48,3 +48,6 @@ vendor/ponytail/skills/ponytail-debt
 vendor/ponytail/skills/ponytail-gain
 vendor/ponytail/skills/ponytail-help
 vendor/ponytail/skills/ponytail-review
+
+# pbakaus/impeccable (impeccable.style)
+vendor/impeccable/.agents/skills/impeccable
