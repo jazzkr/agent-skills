@@ -4,6 +4,8 @@ Agent skills for Claude Code, Codex, and other agents that read `~/.agents/skill
 
 ## Install
 
+This repository and its submodules are public. Installation needs Git and Bash, but no GitHub login.
+
 ```bash
 git clone --recurse-submodules https://github.com/jazzkr/agent-skills.git
 ./agent-skills/install.sh
