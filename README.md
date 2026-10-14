@@ -49,6 +49,10 @@ Renovate tracks only `skill-vX.Y.Z` tags for this source. Engine and CLI tags do
 
 ## Update
 
+Updates use the [hosted Renovate GitHub App](https://github.com/apps/renovate), not a GitHub Actions workflow. No `RENOVATE_TOKEN` secret is needed.
+
+The account owner must [install or configure the app](https://github.com/apps/renovate/installations/new), choose **Only select repositories**, and add `jazzkr/agent-skills`. The app uses the existing `renovate.json`. After authorization, check the repository's Dependency Dashboard and Renovate PRs for activity.
+
 Renovate opens a PR when an upstream source has a new version:
 
 - Sources with a release tag in the `branch` field of `.gitmodules` get release updates. Impeccable uses `skill-vX.Y.Z`; the other tagged sources use `vX.Y.Z`.
