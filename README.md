@@ -11,6 +11,14 @@ git clone --recurse-submodules https://github.com/jazzkr/agent-skills.git
 
 `install.sh` links each folder in `skills.txt` into `~/.agents/skills` and `~/.claude/skills`. If a real folder already has the same name, the script skips it and shows a warning.
 
+## Custom PR review
+
+Use `/pr-review <PR URL or number>` in Claude Code or `$pr-review <PR URL or number>` in Codex. Invoke it explicitly; it is not started by the model on its own.
+
+The skill gathers the PR and stack, explains the change, checks correctness and simplicity, and reports findings with stable IDs. It stops after the report. Only IDs you select are posted as separate comments; it never submits a GitHub review.
+
+The skill uses `show-me`, `ponytail-review`, and `code-review`, which are included in `skills.txt`. It supports both `skill://` loaders and direct reads of installed skill files.
+
 ## Shared agent instructions
 
 `AGENTS.md` adapts [Fabien Sanglard's coding guidance](https://fabiensanglard.net/agent.md/index.html) for this setup. It is kept in Git, not fetched from the website at session start. Review and commit any later changes.
@@ -52,3 +60,4 @@ Do not use `git submodule update --remote`. It fails for submodules that are pin
 
 - From a current source: add its path to `skills.txt`.
 - From a new source: `git submodule add <url> vendor/<name>`, pin it to a release tag (see above), then add its paths to `skills.txt`.
+- Custom: create `skills/<name>/SKILL.md`, then add `skills/<name>` to `skills.txt`.
