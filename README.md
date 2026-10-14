@@ -11,6 +11,24 @@ git clone --recurse-submodules https://github.com/jazzkr/agent-skills.git
 
 `install.sh` links each folder in `skills.txt` into `~/.agents/skills` and `~/.claude/skills`. If a real folder already has the same name, the script skips it and shows a warning.
 
+## Shared agent instructions
+
+`AGENTS.md` adapts [Fabien Sanglard's coding guidance](https://fabiensanglard.net/agent.md/index.html) for this setup. It is kept in Git, not fetched from the website at session start. Review and commit any later changes.
+
+The installer links that one file into:
+
+| Agent | Global instructions |
+|---|---|
+| Codex | `~/.codex/AGENTS.md` (or `$CODEX_HOME/AGENTS.md`) |
+| Claude Code | `~/.claude/CLAUDE.md` (or `$CLAUDE_CONFIG_DIR/CLAUDE.md`) |
+
+Existing real files are left in place, with a warning and exit code 1. Review and merge those instructions by hand before replacing them with links. Start a new agent session after installation. A Codex `AGENTS.override.md` takes precedence over its global `AGENTS.md`.
+
+Every commit must use Conventional Commits, including merge, squash, and revert commits. PR titles use the same format. This replaces the article's capitalized subject rule. Renovate is also set to use Conventional Commits explicitly.
+
+These are agent instructions, not a Git commit hook. They do not block commits made by other tools.
+
+
 ## Impeccable
 
 [Impeccable](https://github.com/pbakaus/impeccable) is pinned to the `skill-v4.5.2` release. The install script links its complete `.agents` skill bundle, including command references, nested agent definitions, and its launcher, into both skill folders.

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Link each skill in skills.txt into the agent skill folders.
+# Link shared skills and global agent instructions.
 # Safe to run again after `git pull`.
 set -euo pipefail
 
@@ -29,5 +29,15 @@ while read -r path; do
     ln -sfn "$src" "$dest"
   done
 done < "$ROOT/skills.txt"
+
+for dest in "${CODEX_HOME:-$HOME/.codex}/AGENTS.md" "${CLAUDE_CONFIG_DIR:-$HOME/.claude}/CLAUDE.md"; do
+  mkdir -p "$(dirname "$dest")"
+  if [[ -e "$dest" && ! -L "$dest" ]]; then
+    echo "skip: $dest exists and is not a symlink" >&2
+    status=1
+    continue
+  fi
+  ln -sfn "$ROOT/AGENTS.md" "$dest"
+done
 
 exit "$status"
