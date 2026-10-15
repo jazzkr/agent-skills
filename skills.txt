@@ -2,6 +2,7 @@
 
 # Custom skills
 skills/pr-review
+skills/pr-cycle
 
 # mattpocock/skills
 vendor/mattpocock-skills/skills/engineering/ask-matt

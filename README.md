@@ -21,6 +21,14 @@ The skill gathers the PR and stack, explains the change, checks correctness and 
 
 The skill uses `show-me`, `ponytail-review`, and `code-review`, which are included in `skills.txt`. It supports both `skill://` loaders and direct reads of installed skill files.
 
+## PR cycle
+
+Use `/pr-cycle <PR URL or number>` in Claude Code or `$pr-cycle <PR URL or number>` in Codex.
+
+The skill reads `pr-review` as its review procedure, fixes open P1/P2 findings, and repeats a full review of the updated local tree against the PR base. It finishes only after a fresh pass finds no open P1/P2 items and verification passes. An unanswered product question or other required prerequisite produces a blocked report, not a clean result.
+
+The final summary lists findings, fixes, checks, remaining P3/P4 items, stack dependencies, and the location of the local changes. Fixes stay local unless you explicitly request commits or pushes. The skill does not post comments, submit reviews, approve, or merge. The normal `/pr-review` selection gate is unchanged.
+
 ## Shared agent instructions
 
 `AGENTS.md` adapts [Fabien Sanglard's coding guidance](https://fabiensanglard.net/agent.md/index.html) for this setup. It is kept in Git, not fetched from the website at session start. Review and commit any later changes.
