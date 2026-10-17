@@ -12,4 +12,4 @@
 [submodule "vendor/impeccable"]
 	path = vendor/impeccable
 	url = https://github.com/pbakaus/impeccable
-	branch = skill-v4.5.2
+	branch = skill-v4.6.0
