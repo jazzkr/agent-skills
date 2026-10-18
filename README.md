@@ -25,9 +25,11 @@ The skill uses `show-me`, `ponytail-review`, and `code-review`, which are includ
 
 Use `/pr-cycle <PR URL or number>` in Claude Code or `$pr-cycle <PR URL or number>` in Codex.
 
-The skill reads `pr-review` as its review procedure, fixes open P1/P2 findings, and repeats a full review of the updated local tree against the PR base. It finishes only after a fresh pass finds no open P1/P2 items and verification passes. An unanswered product question or other required prerequisite produces a blocked report, not a clean result.
+The cycle uses three separate roles: a fixer/coordinator, a normal reviewer that follows `pr-review`, and an additional adversarial reviewer that tries to break the change. The normal reviewer may use the fixer's model. The adversarial reviewer must use a different model from both; a different agent name or reasoning level does not count.
 
-The final summary lists findings, fixes, checks, remaining P3/P4 items, stack dependencies, and the location of the local changes. Fixes stay local unless you explicitly request commits or pushes. The skill does not post comments, submit reviews, approve, or merge. The normal `/pr-review` selection gate is unchanged.
+Both reviewers inspect the same unchanged local tree against the PR base. The fixer addresses their open P1/P2 findings, then both review again in fresh contexts. Completion requires no open P1/P2 findings from either reviewer and passing verification. Missing agents or a distinct adversarial model produce a blocked report; there is no silent self-review or same-model fallback.
+
+The final summary lists each agent's actual provider/model ID, both final review results, findings, fixes, checks, remaining P3/P4 items, stack dependencies, and the location of the local changes. Fixes stay local unless you explicitly request commits or pushes. The skill does not post comments, submit reviews, approve, or merge. The normal `/pr-review` selection gate is unchanged.
 
 ## Shared agent instructions
 
