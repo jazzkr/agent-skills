@@ -27,7 +27,9 @@ Use `/pr-cycle <PR URL or number>` in Claude Code or `$pr-cycle <PR URL or numbe
 
 The cycle uses three separate roles: a fixer/coordinator, a normal reviewer that follows `pr-review`, and an additional adversarial reviewer that tries to break the change. The normal reviewer may use the fixer's model. The adversarial reviewer must use a different model from both; a different agent name or reasoning level does not count.
 
-Both reviewers inspect the same unchanged local tree against the PR base. The fixer addresses their open P1/P2 findings, then both review again in fresh contexts. Completion requires no open P1/P2 findings from either reviewer and passing verification. Missing agents or a distinct adversarial model produce a blocked report; there is no silent self-review or same-model fallback.
+The model pair is fixed: an OpenAI/GPT main review uses **Opus 5.5** for the adversarial review; an Anthropic/Claude main review uses **GPT-6.1**. Exact model IDs are resolved from the available provider catalog. Other Opus versions, Sonnet, and older GPT versions are not substitutes.
+
+Both reviewers inspect the same unchanged local tree against the PR base. The fixer addresses their open P1/P2 findings, then both review again in fresh contexts. Completion requires no open P1/P2 findings from either reviewer and passing verification. Missing agents or the required adversarial model version produce a blocked report; there is no silent self-review or model fallback.
 
 The final summary lists each agent's actual provider/model ID, both final review results, findings, fixes, checks, remaining P3/P4 items, stack dependencies, and the location of the local changes. Fixes stay local unless you explicitly request commits or pushes. The skill does not post comments, submit reviews, approve, or merge. The normal `/pr-review` selection gate is unchanged.
 

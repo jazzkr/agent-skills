@@ -30,7 +30,15 @@ Do not change `pr-review` or its normal stop-for-selection behavior.
 | Normal reviewer | A separate agent in a fresh context runs the full `pr-review` procedure. It may use the fixer's model. |
 | Adversarial reviewer | An additional agent in a fresh context tries to break the change. It must use a different model from both the fixer and the normal reviewer. |
 
-- Discover supported agents and models through the harness's tools, configuration, or CLI help. Prefer the fixer's model for the normal reviewer, so only two distinct models are needed. Prefer a different model family for the adversarial reviewer. Record the actual provider/model IDs used; a different agent name, alias, or reasoning level is not a different model. Do not accept a silent same-model fallback.
+- Discover supported agents and models through the harness's tools, configuration, or CLI help. Prefer the fixer's model for the normal reviewer, so only two distinct models are needed. Select the additional adversarial model with the table below, based on the model driving the normal review:
+
+  | Driving main-review model | Required adversarial model |
+  |---|---|
+  | OpenAI/GPT, including GPT-6.1 | Claude Opus 5.5 |
+  | Anthropic/Claude, including Opus 5.5 | GPT-6.1 |
+
+  Resolve the named version to an exact provider/model ID from the current catalog or configuration. Use GPT-6.1, not GPT-6 or an older GPT; use Opus 5.5, not another Opus version or Sonnet. If the required version is unavailable, or the driving model is outside these two families, report a model-selection blocker. Do not invent an ID or choose a substitute.
+- Record the actual provider/model IDs used and confirm that the chosen adversarial model differs from both primary roles. A different agent name, alias, or reasoning level is not a different model. Do not accept a silent model fallback.
 - The adversarial reviewer supplements the normal reviewer; it never replaces it. Neither reviewer edits production files or fixes findings. Reviewers may reproduce claims in disposable worktrees and remove those artifacts afterward.
 - Give each reviewer the PR spec, stack context, base/head revisions, full current local change, and the review instructions. Initially omit the fixer's rationale and the other reviewer's conclusions so each inspects the code independently. After that inspection, have each verify the existing finding ledger and the claimed fixes.
 - Hold the local tree unchanged while both reviews run. Record the exact reviewed state, including local diffs and untracked file contents, not just the remote head SHA. A later edit invalidates both clean results; run both reviewers again after fixing.
