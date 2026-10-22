@@ -35,3 +35,8 @@ Adapted from [Fabien Sanglard's coding guidance](https://fabiensanglard.net/agen
 - Mark a breaking change with `!` before the colon or a `BREAKING CHANGE:` footer.
 - When a body is needed, separate it from the subject with one blank line. Wrap body text at 72 characters. Explain what changed and why; leave implementation details to the code.
 - Use the same format for PR titles so squash commits retain it. Set an explicit Conventional Commit subject when creating a merge or revert commit; Git's default messages do not meet this rule.
+
+## Pull requests
+
+- The user reviews and merges every PR. Open the PR, report its URL and check status, then stop. This includes deploy, revert, and urgent security PRs.
+- Change `main` and other protected branches only through a PR.
