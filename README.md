@@ -81,3 +81,9 @@ Do not use `git submodule update --remote`. It fails for submodules that are pin
 - From a current source: add its path to `skills.txt`.
 - From a new source: `git submodule add <url> vendor/<name>`, pin it to a release tag (see above), then add its paths to `skills.txt`.
 - Custom: create `skills/kr-<name>/SKILL.md` with `name: kr-<name>`, then add `skills/kr-<name>` to `skills.txt`.
+
+## Contribute
+
+Create a branch and open a PR for every change. Use Conventional Commits for commit messages and PR titles.
+
+The [main branch rules](https://github.com/jazzkr/agent-skills/rules/25671513) require a PR before merge, with no admin or app bypass. They also block force pushes and branch deletion. No review approval is required, so the owner can merge their own PRs.
