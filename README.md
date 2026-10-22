@@ -13,9 +13,11 @@ git clone --recurse-submodules https://github.com/jazzkr/agent-skills.git
 
 `install.sh` links each folder in `skills.txt` into `~/.agents/skills` and `~/.claude/skills`. If a real folder already has the same name, the script skips it and shows a warning.
 
+Custom skills use the `kr-` prefix. The installer removes broken links that point to this repo's custom skill folders, so renamed skills are replaced on the next install. It leaves unrelated links and real folders in place.
+
 ## Custom PR review
 
-Use `/pr-review <PR URL or number>` in Claude Code or `$pr-review <PR URL or number>` in Codex. Invoke it explicitly; it is not started by the model on its own.
+Use `/kr-pr-review <PR URL or number>` in Claude Code or `$kr-pr-review <PR URL or number>` in Codex. Invoke it explicitly; it is not started by the model on its own.
 
 The skill gathers the PR and stack, explains the change, checks correctness and simplicity, and reports findings with stable IDs. It stops after the report. Only IDs you select are posted as separate comments; it never submits a GitHub review.
 
@@ -23,15 +25,15 @@ The skill uses `show-me`, `ponytail-review`, and `code-review`, which are includ
 
 ## PR cycle
 
-Use `/pr-cycle <PR URL or number>` in Claude Code or `$pr-cycle <PR URL or number>` in Codex.
+Use `/kr-pr-cycle <PR URL or number>` in Claude Code or `$kr-pr-cycle <PR URL or number>` in Codex.
 
-The cycle uses three separate roles: a fixer/coordinator, a normal reviewer that follows `pr-review`, and an additional adversarial reviewer that tries to break the change. The normal reviewer may use the fixer's model. The adversarial reviewer must use a different model from both; a different agent name or reasoning level does not count.
+The cycle uses three separate roles: a fixer/coordinator, a normal reviewer that follows `kr-pr-review`, and an additional adversarial reviewer that tries to break the change. The normal reviewer may use the fixer's model. The adversarial reviewer must use a different model from both; a different agent name or reasoning level does not count.
 
 The model pair is fixed: an OpenAI/GPT main review uses **Opus 5.5** for the adversarial review; an Anthropic/Claude main review uses **GPT-6.1**. Exact model IDs are resolved from the available provider catalog. Other Opus versions, Sonnet, and older GPT versions are not substitutes.
 
 Both reviewers inspect the same unchanged local tree against the PR base. The fixer addresses their open P1/P2 findings, then both review again in fresh contexts. Completion requires no open P1/P2 findings from either reviewer and passing verification. Missing agents or the required adversarial model version produce a blocked report; there is no silent self-review or model fallback.
 
-The final summary lists each agent's actual provider/model ID, both final review results, findings, fixes, checks, remaining P3/P4 items, stack dependencies, and the location of the local changes. Fixes stay local unless you explicitly request commits or pushes. The skill does not post comments, submit reviews, approve, or merge. The normal `/pr-review` selection gate is unchanged.
+The final summary lists each agent's actual provider/model ID, both final review results, findings, fixes, checks, remaining P3/P4 items, stack dependencies, and the location of the local changes. Fixes stay local unless you explicitly request commits or pushes. The skill does not post comments, submit reviews, approve, or merge. The normal `/kr-pr-review` selection gate is unchanged.
 
 ## Shared agent instructions
 
@@ -78,4 +80,4 @@ Do not use `git submodule update --remote`. It fails for submodules that are pin
 
 - From a current source: add its path to `skills.txt`.
 - From a new source: `git submodule add <url> vendor/<name>`, pin it to a release tag (see above), then add its paths to `skills.txt`.
-- Custom: create `skills/<name>/SKILL.md`, then add `skills/<name>` to `skills.txt`.
+- Custom: create `skills/kr-<name>/SKILL.md` with `name: kr-<name>`, then add `skills/kr-<name>` to `skills.txt`.

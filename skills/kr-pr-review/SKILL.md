@@ -1,5 +1,5 @@
 ---
-name: pr-review
+name: kr-pr-review
 description: Review a GitHub PR, explain and rank findings, and post only user-selected comments.
 argument-hint: "[PR URL or number]"
 disable-model-invocation: true

@@ -8,6 +8,16 @@ TARGETS=("$HOME/.agents/skills" "$HOME/.claude/skills")
 
 git -C "$ROOT" submodule update --init
 
+# Remove broken links to custom skills that were renamed or removed.
+for target in "${TARGETS[@]}"; do
+  for dest in "$target"/*; do
+    [[ -L "$dest" && ! -e "$dest" ]] || continue
+    case "$(readlink "$dest")" in
+      "$ROOT/skills/"*) rm -- "$dest" ;;
+    esac
+  done
+done
+
 status=0
 while read -r path; do
   [[ -z "$path" || "$path" == \#* ]] && continue

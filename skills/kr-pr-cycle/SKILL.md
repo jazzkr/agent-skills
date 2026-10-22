@@ -1,5 +1,5 @@
 ---
-name: pr-cycle
+name: kr-pr-cycle
 description: Review and fix a GitHub PR until no open P1 or P2 findings remain, then summarize the changes.
 argument-hint: "[PR URL or number]"
 disable-model-invocation: true
@@ -11,23 +11,23 @@ Run a review–fix–review cycle for one GitHub PR with a fixer, a normal revie
 
 ## Review procedure
 
-Read the sibling `../pr-review/SKILL.md`. If the harness cannot resolve that relative path, read the installed `pr-review` skill from its reported path, `~/.agents/skills/pr-review/SKILL.md`, or `~/.claude/skills/pr-review/SKILL.md`. Read its dependency skills as directed there.
+Read the sibling `../kr-pr-review/SKILL.md`. If the harness cannot resolve that relative path, read the installed `kr-pr-review` skill from its reported path, `~/.agents/skills/kr-pr-review/SKILL.md`, or `~/.claude/skills/kr-pr-review/SKILL.md`. Read its dependency skills as directed there.
 
-Reuse steps 1–3 of `pr-review`: gathering the PR and stack, explaining the change, reviewing correctness and simplicity, and recording findings with evidence and stable IDs. Apply these overrides only for this cycle:
+Reuse steps 1–3 of `kr-pr-review`: gathering the PR and stack, explaining the change, reviewing correctness and simplicity, and recording findings with evidence and stable IDs. Apply these overrides only for this cycle:
 
 - After step 3, fix open P1/P2 findings and repeat the review instead of waiting for ID selection.
 - After the initial remote review, review the full current local change against the recorded base, including fixes, untracked files, and tests. Do not keep reviewing the unchanged remote diff or only the last fix.
 - Keep the finding ledger during the cycle. Give brief progress updates; present the combined summary at the end rather than repeat the full report after every pass.
 - Never run step 4. Do not post comments, submit reviews, approve, or merge the PR. Keep fixes local; commit or push only if the user explicitly asks. Any commits must use Conventional Commits.
 
-Do not change `pr-review` or its normal stop-for-selection behavior.
+Do not change `kr-pr-review` or its normal stop-for-selection behavior.
 
 ## Agent roles
 
 | Role | Responsibility |
 |---|---|
 | Fixer/coordinator | Gather context, maintain the finding ledger, edit production code, run verification, and report the result. |
-| Normal reviewer | A separate agent in a fresh context runs the full `pr-review` procedure. It may use the fixer's model. |
+| Normal reviewer | A separate agent in a fresh context runs the full `kr-pr-review` procedure. It may use the fixer's model. |
 | Adversarial reviewer | An additional agent in a fresh context tries to break the change. It must use a different model from both the fixer and the normal reviewer. |
 
 - Discover supported agents and models through the harness's tools, configuration, or CLI help. Prefer the fixer's model for the normal reviewer, so only two distinct models are needed. Select the additional adversarial model with the table below, based on the model driving the normal review:
@@ -46,7 +46,7 @@ Do not change `pr-review` or its normal stop-for-selection behavior.
 
 ## 1. Prepare
 
-- Resolve the PR repository, number, base, and head SHA. Gather existing reviews, comments, linked specs, and stack order with the `pr-review` procedure.
+- Resolve the PR repository, number, base, and head SHA. Gather existing reviews, comments, linked specs, and stack order with the `kr-pr-review` procedure.
 - Use the current checkout only if it is clean and matches the selected PR head. Otherwise, fetch the required refs and create a separate worktree at that head. Preserve the user's existing changes.
 - Record the base revision and starting head SHA. Run the relevant baseline checks; distinguish existing failures from regressions introduced during the cycle.
 - Select and verify the three agent roles and model identities before starting the review passes.
@@ -55,8 +55,8 @@ Done when the review target and baseline are known, both reviewers are available
 
 ## 2. Review
 
-- Have the normal reviewer run the full `pr-review` procedure, including the show-me explanation, ponytail tags, Standards and Spec axes, existing-comment checks, P1 reproductions, and stack ownership.
-- Have the additional, different-model adversarial reviewer independently challenge spec assumptions, callers and boot paths, state transitions, boundaries, malformed inputs, failure paths, permissions, races, and stack/pipeline interactions where relevant. Ask for concrete counterexamples and evidence, not a quota of findings or agreement with the fixer. Apply the same priority, reproduction, and ownership rules as `pr-review`.
+- Have the normal reviewer run the full `kr-pr-review` procedure, including the show-me explanation, ponytail tags, Standards and Spec axes, existing-comment checks, P1 reproductions, and stack ownership.
+- Have the additional, different-model adversarial reviewer independently challenge spec assumptions, callers and boot paths, state transitions, boundaries, malformed inputs, failure paths, permissions, races, and stack/pipeline interactions where relevant. Ask for concrete counterexamples and evidence, not a quota of findings or agreement with the fixer. Apply the same priority, reproduction, and ownership rules as `kr-pr-review`.
 - Collect both reports before fixing. Merge duplicate findings into one stable ID and record which reviewer found or confirmed each issue. Resolve disagreements with the spec, code, and reproductions, not majority vote; an unresolved P1/P2 disagreement stays open.
 - Track each finding's ID, priority, owning PR, evidence, status, proposed fix, and verification. Reuse IDs across passes; give new findings the next free number. Record which pass found or closed each item.
 - An unresolved P2 question remains open until code, tests, or the linked spec answers it. Do not invent product decisions or lower a priority to end the cycle.
@@ -70,7 +70,7 @@ If either reviewer reports an open P1/P2 finding, go to step 3. If neither does,
 - Fix open P1/P2 findings in priority order. Make the smallest changes that address their causes. Leave P3/P4 improvements alone unless they are needed for a P1/P2 fix.
 - For each bug, add a suitable regression test, observe it fail for the expected reason, apply the fix, and observe it pass. Run the relevant existing checks and exercise the changed runtime path. If a regression test cannot cover the behavior, use a reproducible smoke check and state the limit.
 - Close an item only with evidence that its behavior is fixed or its question is resolved. Passing tests do not by themselves prove all P1/P2 findings are gone.
-- Remove throwaway P1 reproduction tests and their temporary worktrees as `pr-review` requires. Keep permanent regression tests and any worktree that contains the fixes.
+- Remove throwaway P1 reproduction tests and their temporary worktrees as `kr-pr-review` requires. Keep permanent regression tests and any worktree that contains the fixes.
 - If the same finding survives a pass, investigate the failed fix rather than repeat it. If a required decision, permission, external dependency, or safe fix is unavailable, stop with a blocked summary. Do not use a fixed pass count as a clean-exit condition.
 
 Return to step 2 after the fixes. A fix pass is not a final review.

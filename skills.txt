@@ -1,8 +1,8 @@
 # Skill folders to install, relative to the repo root. One per line.
 
 # Custom skills
-skills/pr-review
-skills/pr-cycle
+skills/kr-pr-review
+skills/kr-pr-cycle
 
 # mattpocock/skills
 vendor/mattpocock-skills/skills/engineering/ask-matt
