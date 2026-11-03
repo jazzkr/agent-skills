@@ -5,7 +5,7 @@
 [submodule "vendor/ponytail"]
 	path = vendor/ponytail
 	url = https://github.com/DietrichGebert/ponytail
-	branch = v5.3.2
+	branch = v5.3.3
 [submodule "vendor/humanlayer-skills"]
 	path = vendor/humanlayer-skills
 	url = https://github.com/humanlayer/skills
